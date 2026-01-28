@@ -3,7 +3,7 @@ import {
   toArray,
   tryOnScopeDispose,
   unrefElement
-} from "./chunk-WXG77AVY.js";
+} from "./chunk-5FCN6NNK.js";
 import {
   computed,
   shallowRef,
@@ -1272,7 +1272,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
   return trap;
 };
 
-// node_modules/@vueuse/integrations/dist/useFocusTrap-lXZ_YG-8.js
+// node_modules/@vueuse/integrations/useFocusTrap.mjs
 function useFocusTrap(target, options = {}) {
   let trap;
   const { immediate, ...focusTrapOptions } = options;
@@ -1292,32 +1292,36 @@ function useFocusTrap(target, options = {}) {
       isPaused.value = false;
     }
   };
-  watch(computed(() => {
-    return toArray(toValue(target)).map((el) => {
+  const targets = computed(() => {
+    const _targets = toValue(target);
+    return toArray(_targets).map((el) => {
       const _el = toValue(el);
       return typeof _el === "string" ? _el : unrefElement(_el);
     }).filter(notNullish);
-  }), (els) => {
-    if (!els.length) return;
-    if (!trap) {
+  });
+  watch(
+    targets,
+    (els) => {
+      if (!els.length)
+        return;
       trap = createFocusTrap(els, {
         ...focusTrapOptions,
         onActivate() {
           hasFocus.value = true;
-          if (options.onActivate) options.onActivate();
+          if (options.onActivate)
+            options.onActivate();
         },
         onDeactivate() {
           hasFocus.value = false;
-          if (options.onDeactivate) options.onDeactivate();
+          if (options.onDeactivate)
+            options.onDeactivate();
         }
       });
-      if (immediate) activate();
-    } else {
-      const isActive = trap === null || trap === void 0 ? void 0 : trap.active;
-      trap === null || trap === void 0 || trap.updateContainerElements(els);
-      if (!isActive && immediate) activate();
-    }
-  }, { flush: "post" });
+      if (immediate)
+        activate();
+    },
+    { flush: "post" }
+  );
   tryOnScopeDispose(() => deactivate());
   return {
     hasFocus,

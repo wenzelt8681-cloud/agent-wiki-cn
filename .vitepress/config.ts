@@ -3,11 +3,12 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Agent Wiki CN",
   description: "全球优质 AI Agent 内容汉化与实战指南",
-  
+
   // 网页标签栏图标（你可以找一个机器人图标放进 docs/public）
   // head: [
   //   ['link', { rel: 'icon', href: '/logo.png' }]
   // ],
+
 
   themeConfig: {
     // 1. 导航栏配置
