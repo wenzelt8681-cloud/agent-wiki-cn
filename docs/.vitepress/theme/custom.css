@@ -1,0 +1,12 @@
+:root {
+  /* 把 Vue 的绿色改成 AI 圈常用的星际紫 */
+  --vp-c-brand-1: #7c4dff; 
+  --vp-c-brand-2: #651fff;
+  --vp-c-brand-3: #b388ff;
+}
+
+/* 让图片圆角一点，更有现代感 */
+.vp-doc img {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
