@@ -1,0 +1,38 @@
+name: Deploy VitePress site to Pages
+
+on:
+  push:
+    branches: [main]  # 如果你的主分支是 master，改成 [master]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          
+      - run: npm ci
+      
+      - run: npm run docs:build  # 确保这个命令和你 package.json 里的构建命令一致
+      
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/.vitepress/dist  # 确保这是你的构建输出目录
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
