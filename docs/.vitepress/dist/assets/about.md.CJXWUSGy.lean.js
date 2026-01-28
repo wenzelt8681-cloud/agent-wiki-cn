@@ -1,0 +1,1 @@
+import{_ as t,o as e,c as o,ag as r}from"./chunks/framework.DUEg9mRL.js";const u=JSON.parse('{"title":"关于本项目","description":"","frontmatter":{},"headers":[],"relativePath":"about.md","filePath":"about.md"}'),n={name:"about.md"};function i(l,a,s,_,d,c){return e(),o("div",null,[...a[0]||(a[0]=[r("",6)])])}const p=t(n,[["render",i]]);export{u as __pageData,p as default};
